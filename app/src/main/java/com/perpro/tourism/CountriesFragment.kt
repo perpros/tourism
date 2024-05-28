@@ -27,5 +27,6 @@ class CountriesFragment: Fragment(R.layout.fragment_countries) {
         }
 
         viewModel.loadCountries()
+
     }
 }

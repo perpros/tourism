@@ -12,12 +12,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-//        val attractionsFragment = AttractionsFragment()
         val countriesFragment = CountriesFragment()
-
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             add(R.id.fragment_container_view, countriesFragment)
+        }
+
+        val attractionsFragment = AttractionsFragment()
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container_view, attractionsFragment)
         }
     }
 }

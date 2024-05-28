@@ -9,8 +9,8 @@ import com.perpro.tourism.useCases.repository.ITourismRepository
 import com.perpro.tourism.useCases.GetAttractionsUseCase
 import kotlinx.coroutines.launch
 
-class AttractionsViewModel(
-    private val repository: ITourismRepository
+class AttractionViewModel(
+    repository: ITourismRepository
 ) : ViewModel() {
     private val _getAttractionsUseCase =  GetAttractionsUseCase(repository)
     private val _attractions = MutableLiveData<List<Attraction>>()
