@@ -10,6 +10,6 @@ class TourismRepository: ITourismRepository {
     }
 
     override suspend fun getAttractions(countryId: Int): List<Attraction> {
-        TODO("Not yet implemented")
+        return Attraction.loadAttractions(countryId)
     }
 }

@@ -2,38 +2,22 @@ package com.perpro.tourism
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.perpro.tourism.databinding.ActivityMainBinding
-import com.perpro.tourism.infrastructure.TourismRepository
-import com.perpro.tourism.viewModel.CountryViewModel
+import androidx.fragment.app.commit
 
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var countryAdapter: CountryAdapter
-
-    private  lateinit var binding: ActivityMainBinding
-
-    private lateinit var viewModel: CountryViewModel
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-//        viewModel = ViewModelProvider(this)[TourismViewModel::class.java]
-        viewModel = CountryViewModel(repository = TourismRepository())
+        setContentView(R.layout.activity_main)
 
 
-        countryAdapter = CountryAdapter(mutableListOf())
+//        val attractionsFragment = AttractionsFragment()
+        val countriesFragment = CountriesFragment()
 
-        binding.rvCountryItems.adapter = countryAdapter
-        binding.rvCountryItems.layoutManager = LinearLayoutManager(this)
-
-        viewModel.countries.observe(this) { countries ->
-            countryAdapter.submitList(countries)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container_view, countriesFragment)
         }
-
-        viewModel.loadCountries()
     }
 }
