@@ -1,12 +1,40 @@
 package com.perpro.tourism.entities
 
+import android.os.Parcel
+import android.os.Parcelable
+
 
 data class Country (
     val id: Int,
     val name: String,
     val attractions: List<Attraction>? = null,
-){
-    companion object{
+): Parcelable {
+
+    constructor(parcel: Parcel) : this(
+        parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readArrayList(Attraction::class.java.classLoader) as List<Attraction>?
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeInt(id)
+        parcel.writeString(name)
+        parcel.writeList(attractions)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Country> {
+        override fun createFromParcel(parcel: Parcel): Country {
+            return Country(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Country?> {
+            return arrayOfNulls(size)
+        }
+
 
         fun loadCountries(): ArrayList<Country>{
 
@@ -42,26 +70,8 @@ data class Country (
             val country10 = Country( 10, "Iran10")
             countries.add(country10)
 
-            val country11 = Country( 11, "Iran11")
-            countries.add(country11)
-
-            val country12 = Country( 12, "Iran12")
-            countries.add(country12)
-
-            val country13 = Country( 13, "Iran13")
-            countries.add(country13)
-
-            val country14 = Country( 14, "Iran14")
-            countries.add(country14)
-
-            val country15 = Country( 15, "Iran15")
-            countries.add(country15)
-
-            val country16 = Country( 16, "Iran16")
-            countries.add(country16)
 
             return countries
         }
-
     }
 }
