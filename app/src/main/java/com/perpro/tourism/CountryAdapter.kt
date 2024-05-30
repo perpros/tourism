@@ -8,12 +8,16 @@ import com.perpro.tourism.entities.Country
 
 
 class CountryAdapter(
-    private var countries: MutableList<Country>
+    private var countries: MutableList<Country>,
+    private val navigateToAttractions: (country: Country)-> Unit,
 ): RecyclerView.Adapter<CountryAdapter.CountryViewHolder>() {
 
     class CountryViewHolder(private  val binding: ItemCountryBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(country: Country){
+        fun bind(country: Country, navigateToAttractions: (country: Country)-> Unit){
             binding.country = country
+            binding.btnCountry.setOnClickListener {
+                navigateToAttractions(country)
+            }
         }
     }
 
@@ -27,7 +31,7 @@ class CountryAdapter(
     }
 
     override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
-        holder.bind(countries[position])
+        holder.bind(countries[position], navigateToAttractions)
     }
 
     override fun getItemCount(): Int {

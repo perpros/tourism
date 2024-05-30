@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.perpro.tourism.databinding.FragmentCountriesBinding
+import com.perpro.tourism.entities.Country
 import com.perpro.tourism.infrastructure.TourismRepository
 import com.perpro.tourism.viewModel.CountryViewModel
 
@@ -17,7 +18,7 @@ class CountriesFragment: Fragment(R.layout.fragment_countries) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentCountriesBinding.bind(view)
         viewModel = CountryViewModel(repository = TourismRepository())
-        countryAdapter = CountryAdapter(mutableListOf())
+        countryAdapter = CountryAdapter(mutableListOf(), this::navigateToAttractions)
 
         binding.rvCountryItems.adapter = countryAdapter
         binding.rvCountryItems.layoutManager = LinearLayoutManager(requireContext())
@@ -27,5 +28,9 @@ class CountriesFragment: Fragment(R.layout.fragment_countries) {
         }
 
         viewModel.loadCountries()
+    }
+
+    private fun navigateToAttractions(country: Country) {
+        activity?.let { (activity as MainActivity).navigateToAttractionsFragment(country) }
     }
 }

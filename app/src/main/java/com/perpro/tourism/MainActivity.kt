@@ -2,7 +2,7 @@ package com.perpro.tourism
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.commit
+import com.perpro.tourism.entities.Country
 
 
 class MainActivity : AppCompatActivity() {
@@ -12,12 +12,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
-//        val attractionsFragment = AttractionsFragment()
-        val countriesFragment = CountriesFragment()
-
-        supportFragmentManager.commit {
-            setReorderingAllowed(true)
-            add(R.id.fragment_container_view, countriesFragment)
+        if (savedInstanceState == null) {
+            val countriesFragment = CountriesFragment()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_view, countriesFragment)
+                .commit()
         }
+    }
+
+    fun navigateToAttractionsFragment(country: Country) {
+        val attractionsFragment = AttractionsFragment.newInstance(country)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container_view, attractionsFragment)
+            .addToBackStack(null) // Add to backstack for back button support
+            .commit()
     }
 }

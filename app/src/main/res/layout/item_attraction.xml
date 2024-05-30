@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
-            name="country"
-            type="com.perpro.tourism.entities.Country" />
+            name="attraction"
+            type="com.perpro.tourism.entities.Attraction" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,24 +15,24 @@
         android:paddingEnd="8dp">
 
         <TextView
-            android:id="@+id/tvCountryTitle"
+            android:id="@+id/tvAttractionName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{country.name}"
+            android:text="@{attraction.name}"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnCountry"
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/view_Attractions"
+            android:text="@{attraction.description}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCountryTitle"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintTop_toBottomOf="@+id/tvAttractionName" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
