@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">tourism</string>
+    <string name="enter_search_title">Enter Search Title</string>
 </resources>
